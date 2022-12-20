@@ -1,18 +1,16 @@
 plugins {
-    id("com.android.application")
+    id("com.android.library")
     id("org.jetbrains.kotlin.android")
     id("kotlin-kapt")
+    id("com.google.dagger.hilt.android")
 }
 
 android {
     compileSdk = AppConfig.compileSdk
 
     defaultConfig {
-        applicationId = "kr.hs.b1nd.intern.mentomen_cleanarchitecture"
         minSdk = AppConfig.minSdk
         targetSdk = AppConfig.targetSdk
-        versionCode = AppConfig.versionCode
-        versionName = AppConfig.versionName
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -21,12 +19,22 @@ android {
 dependencies {
 
     implementation(Libraries.KTX.CORE)
-    implementation(Libraries.AndroidX.APP_COMPAT)
-    implementation(Libraries.AndroidX.MATERIAL)
-    implementation(Libraries.AndroidX.CONSTRAINT_LAYOUT)
     testImplementation(Libraries.Test.JUNIT)
     androidTestImplementation(Libraries.AndroidTest.TEST_RUNNER)
     androidTestImplementation(Libraries.AndroidTest.ESPRESSO_CORE)
 
+    implementation(Libraries.Hilt.HILT)
+    kapt(Libraries.Hilt.HILT_COMPILER)
+
+    implementation(Libraries.OkHttp.OKHTTP)
+    implementation(Libraries.OkHttp.OKHTTP_INTERCEPTOR)
+
+    implementation(Libraries.Retrofit.RETROFIT)
+    implementation(Libraries.Retrofit.RETROFIT_GSON)
+
+    implementation(Libraries.Coroutine.COROUTINE)
+    implementation(Libraries.Coroutine.COROUTINE_CORE)
+
     implementation(project(":domain"))
+
 }
